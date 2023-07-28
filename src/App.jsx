@@ -1,7 +1,15 @@
+// import { Button } from "./components/UI/Button";
+import { Header } from "./components/header/Header";
+import { MealsSummary } from "./components/mealsSummary/MealsSummary";
+
 function App() {
   return (
-    <div className="App">
-      <h1>Order food</h1>
+    <div>
+      <Header />
+      <MealsSummary />
+      {/* <Meals /> */}
+      {/* <MealItem />   */}
+      {/* <Button /> */}
     </div>
   );
 }
