@@ -1,7 +1,13 @@
+import { Button } from "./components/UI/Button";
+
 function App() {
   return (
-    <div className="App">
-      <h1>Order food</h1>
+    <div>
+      <Header />
+      <MealsSummary />
+      <Meals />
+      <MealItem />
+      <Button />
     </div>
   );
 }
