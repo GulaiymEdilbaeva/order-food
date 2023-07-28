@@ -1,11 +1,7 @@
-// import React, { memo, useContext, useState } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import Button from "../UI/Button";
-// import { ReactComponent as PlusIcon } from "../../../assets/icons/plus-icon.svg";
 import { PlusIcon } from "../../assets";
-// import { BasketContext } from "../../../store/BasketContext";
-// import Button from "../../UI/Button";
 
 export const MealItemForm = () => {
   const [amount, setAmount] = useState(1);
@@ -32,8 +28,6 @@ export const MealItemForm = () => {
     </StyledForm>
   );
 };
-
-// export default memo(MealItemForm);
 
 const Container = styled.div`
   margin-bottom: 10px;
