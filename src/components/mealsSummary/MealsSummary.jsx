@@ -10,15 +10,16 @@ export const MealsSummary = () => {
       </MainImageWrapper>
 
       <MealsSummaryContainer>
-        <h2>Delicious Food, Delivered To You</h2>
-        <p>
+        <h3>Delicious Food, Delivered To You</h3>
+
+        <Paragraph>
           Choose your favorite meal from our broad selection of available meals
           and enjoy a delicious lunch or dinner at home.
-        </p>
-        <p>
+        </Paragraph>
+        <Paragraph>
           All our meals are cooked with high-quality ingredients, just-in-time
           and of course by  experienced chefs!
-        </p>
+        </Paragraph>
       </MealsSummaryContainer>
     </section>
   );
@@ -31,22 +32,33 @@ const MainImageWrapper = styled.div`
   overflow: hidden;
   & > img {
     object-fit: cover;
+    height: 100%;
+    width: 100%;
   }
 `;
 
 const MealsSummaryContainer = styled.div`
   text-align: center;
-  max-width: 45rem;
-  width: 100%;
+  width: 854px;
+  height: 270px;
   margin: 0 auto;
   background-color: #383838;
   color: #fff;
   border-radius: 16px;
-  padding: 1rem;
+  padding: 3rem;
   box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.3);
   margin-top: -10rem;
   position: relative;
-  & > h2 {
+  h3 {
     font-size: 2rem;
   }
+`;
+const Paragraph = styled.p`
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 25px;
+  text-align: center;
+  margin-top: 20px;
+  color: white;
 `;

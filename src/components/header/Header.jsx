@@ -1,6 +1,8 @@
 import React from "react";
+
 import { styled } from "styled-components";
 import { HeaderCartButton } from "./HeaderCartButton";
+
 export const Header = () => {
   return (
     <StyledHeader>
@@ -11,7 +13,7 @@ export const Header = () => {
 };
 
 const StyledHeader = styled.header`
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
