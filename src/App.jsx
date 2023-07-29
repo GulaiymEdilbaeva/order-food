@@ -1,5 +1,6 @@
 // import { Button } from "./components/UI/Button";
 import { Header } from "./components/header/Header";
+import { Meals } from "./components/meals/Meals";
 import { MealsSummary } from "./components/mealsSummary/MealsSummary";
 
 function App() {
@@ -7,8 +8,7 @@ function App() {
     <div>
       <Header />
       <MealsSummary />
-      {/* <Meals /> */}
-      {/* <MealItem />   */}
+      <Meals />
       {/* <Button /> */}
     </div>
   );
