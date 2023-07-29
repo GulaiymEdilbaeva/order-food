@@ -54,11 +54,10 @@ const MealsSummaryContainer = styled.div`
   }
 `;
 const Paragraph = styled.p`
-  font-style: normal;
   font-weight: 500;
   font-size: 16px;
   line-height: 25px;
   text-align: center;
   margin-top: 20px;
-  color: white;
+  color: #fff;
 `;

@@ -22,18 +22,18 @@ export const Meals = () => {
                 {meal.title}
               </h3>
               <DescriptionFood>{meal.about}</DescriptionFood>
-              <h5
+              <h4
                 style={{
                   width: "67px",
                   height: "30px",
-                  fontWeight: "700",
+                  fontWeight: "900",
                   fontSize: "20px",
                   color: "#ad5502",
                   fontFamily: "Poppins",
                 }}
               >
                 ${meal.price}
-              </h5>
+              </h4>
             </Container>
 
             <MealItemForm />
