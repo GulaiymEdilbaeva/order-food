@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { styled } from "styled-components";
-import { MinusIcon, Plus } from "../../assets";
+// import { MinusIcon, Plus } from "../../assets";
+import Button from "../UI/Button";
+import { CartContext } from "../../store/cart-context";
 
-export const CartItem = ({
-  title = "Title of food",
-  price = 22.99,
-  amount = 5,
-}) => {
+export const CartItem = ({ title, meal, price, amount }) => {
+  const { Decrement, Increment } = useContext(CartContext);
   return (
     <ListItem>
       <Content>
@@ -17,8 +16,20 @@ export const CartItem = ({
         </PriceContainer>
       </Content>
       <div>
-        <MinusIcon />
-        <Plus />
+        <Button
+          borderStyle="squared"
+          variant="outlined"
+          onClick={() => Decrement(meal.id)}
+        >
+          -
+        </Button>
+        <Button
+          borderStyle="squared"
+          variant="outlined"
+          onClick={() => Increment(meal.id)}
+        >
+          +
+        </Button>
       </div>
     </ListItem>
   );

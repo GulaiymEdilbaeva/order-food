@@ -2,13 +2,19 @@ import React from "react";
 import styled from "styled-components";
 
 const Button = ({
+  onClick,
   children,
   variant = "contained",
   borderStyle = "rounded",
   ...restProps
 }) => {
   return (
-    <StyledButton {...restProps} borderStyle={borderStyle} variant={variant}>
+    <StyledButton
+      onClick={onClick}
+      borderStyle={borderStyle}
+      variant={variant}
+      {...restProps}
+    >
       {children}
     </StyledButton>
   );
@@ -41,14 +47,16 @@ const StyledButton = styled.button`
   line-height: 23px;
   color: ${getColor};
   border: ${getBorder};
-  :hover {
+
+  &:hover {
     background: #7e2a0a;
     color: #fff;
   }
-  :active {
+
+  &:active {
     background: #993108;
   }
-  :disabled {
+  &:disabled {
     background: #cac6c4;
   }
 `;

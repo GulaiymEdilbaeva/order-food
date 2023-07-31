@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { Modal } from "./components/UI/modal/Modal";
 import { Cart } from "./components/cart/Cart";
 import { Header } from "./components/header/Header";
 import { Meals } from "./components/meals/Meals";
@@ -14,7 +13,6 @@ function App() {
       <MealsSummary />
       <Meals />
       {isModalOpen && <Cart onClose={onClose} />}
-      {/* <Modal /> */}
     </div>
   );
 }

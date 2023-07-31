@@ -12,7 +12,7 @@ export const MealItemForm = ({ onAddMeal }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    onAddMeal();
+    onAddMeal(amount);
   };
 
   return (
@@ -27,7 +27,7 @@ export const MealItemForm = ({ onAddMeal }) => {
           type="number"
         />
       </Container>
-      <Button>
+      <Button type="submit">
         <PlusIcon /> Add
       </Button>
     </StyledForm>

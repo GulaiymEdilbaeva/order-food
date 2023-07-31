@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Modal } from "../UI/modal/Modal";
 import { CartItem } from "./CartItem";
 import { styled } from "styled-components";
 import { TotalAmount } from "./TotalAmount";
 import Button from "../UI/Button";
+import { CartContext } from "../../store/cart-context";
 export const Cart = ({ onClose }) => {
+  const { addedMeals } = useContext(CartContext);
   return (
-    <Modal>
+    <Modal onClose={onClose}>
       <Content>
         <CartList>
-          <CartItem />
-          <CartItem />
+          {addedMeals.map((meal) => (
+            <CartItem
+              title={meal.title}
+              amount={meal.amount}
+              price={meal.price}
+              key={meal.id}
+              meal={meal}
+            />
+          ))}
         </CartList>
         <TotalAmount />
         <ActionSContainer>
