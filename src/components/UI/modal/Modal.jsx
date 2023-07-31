@@ -33,7 +33,7 @@ const BackdropContainer = styled.div`
 `;
 const ModalContainer = styled.div`
   position: fixed;
-  top: 20vh;
+  top: 10vh;
   left: 5%;
   width: 90%;
   background-color: white;

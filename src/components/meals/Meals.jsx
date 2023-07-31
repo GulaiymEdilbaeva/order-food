@@ -1,86 +1,77 @@
 import React from "react";
-import { DUMMY_MEALS } from "../mealItem/MealItem";
 import { styled } from "styled-components";
-import { MealItemForm } from "../mealItem/MealItemForm";
+import { MealItem } from "../mealItem/MealItem";
 
+export const DUMMY_MEALS = [
+  {
+    id: 1,
+    title: "Sushi",
+    about: "Finest fish and veggies",
+    price: 22.99,
+  },
+  {
+    id: 2,
+    title: "Schnitzel",
+    about: "A german specialty!",
+    price: 16.0,
+  },
+  {
+    id: 3,
+    title: "Barbecue Burger",
+    about: "American, raw, meaty",
+    price: 12.99,
+  },
+  {
+    id: 4,
+    title: "Green Bowl",
+    about: "Healthy...and green...",
+    price: 19.99,
+  },
+];
 export const Meals = () => {
   return (
-    <MainContainer>
-      {DUMMY_MEALS.map((meal) => (
-        <>
-          <List>
-            <Container>
-              <h3
-                style={{
-                  height: "27px",
-                  fontWeight: "600",
-                  fontSize: "18px",
-                  color: "#222222",
-                }}
-              >
-                {" "}
-                {meal.title}
-              </h3>
-              <DescriptionFood>{meal.about}</DescriptionFood>
-              <h4
-                style={{
-                  width: "67px",
-                  height: "30px",
-                  fontWeight: "900",
-                  fontSize: "20px",
-                  color: "#ad5502",
-                  fontFamily: "Poppins",
-                }}
-              >
-                ${meal.price}
-              </h4>
-            </Container>
-
-            <MealItemForm />
-          </List>
-          <Line></Line>
-        </>
-      ))}
-    </MainContainer>
+    <Container>
+      <ul>
+        {DUMMY_MEALS.map((meal) => {
+          return (
+            <MealItem
+              key={meal.id}
+              title={meal.title}
+              about={meal.about}
+              price={meal.price}
+              id={meal.id}
+            />
+          );
+        })}
+      </ul>
+    </Container>
   );
 };
 
-const MainContainer = styled.div`
-  position: absolute;
-  top: 635px;
-  left: 114px;
-  background-color: white;
-  width: 1039px;
-  height: 564px;
-  border-radius: 16px;
-`;
+const Container = styled("section")`
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  max-width: 60rem;
+  width: 90%;
+  margin: 2rem auto;
+  animation: meals-appear 1s ease-out forwards;
 
-const List = styled.div`
-  height: 60px;
-  margin-top: 40px;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 50px;
-`;
+  & > ul {
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+    list-style: none;
+  }
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-`;
-
-const DescriptionFood = styled.p`
-  width: 184px;
-  height: 24px;
-  font-style: italic;
-  font-weight: 400;
-  font-size: 16px;
-`;
-const Line = styled.span`
-  width: 959px;
-  height: 0px;
-  margin: 30px;
-  display: flex;
-  border: 1px solid #d6d6d6;
-  box-shadow: 0px 6px 12px rgba(36, 36, 36, 0.08);
+  @keyframes meals-appear {
+    from {
+      opacity: 0;
+      transform: translateY(3rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 `;
