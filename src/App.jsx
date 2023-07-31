@@ -1,4 +1,4 @@
-// import { Button } from "./components/UI/Button";
+import { Modal } from "./components/UI/modal/Modal";
 import { Header } from "./components/header/Header";
 import { Meals } from "./components/meals/Meals";
 import { MealsSummary } from "./components/mealsSummary/MealsSummary";
@@ -9,7 +9,7 @@ function App() {
       <Header />
       <MealsSummary />
       <Meals />
-      {/* <Button /> */}
+      <Modal />
     </div>
   );
 }
