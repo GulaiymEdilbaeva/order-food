@@ -3,15 +3,20 @@ import styled from "styled-components";
 import Button from "../UI/Button";
 import { PlusIcon } from "../../assets";
 
-export const MealItemForm = () => {
+export const MealItemForm = ({ onAddMeal }) => {
   const [amount, setAmount] = useState(1);
 
   const amountChangeHandler = (event) => {
-    setAmount(+event.target.value);
+    setAmount(Number(event.target.value));
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    onAddMeal();
   };
 
   return (
-    <StyledForm>
+    <StyledForm onSubmit={submitHandler}>
       <Container>
         <label htmlFor="amount">Amount</label>
         <input

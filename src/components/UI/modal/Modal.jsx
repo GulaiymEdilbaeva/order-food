@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import ReactDOM from "react-dom";
 
 const Backdrop = ({ onClose }) => {
-  return <BackdropContainer></BackdropContainer>;
+  return <BackdropContainer onClick={onClose}></BackdropContainer>;
 };
 
 const BACKDROP_ELEMENT = document.getElementById("backdrop");

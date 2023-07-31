@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BasketIcon } from "../../assets";
 import { keyframes, styled } from "styled-components";
+import { ModalContext } from "../../store/modal-context";
 
 export const HeaderCartButton = () => {
+  const { onOpen } = useContext(ModalContext);
   return (
-    <StyledButton>
+    <StyledButton onClick={onOpen}>
       <BasketIcon />
       <span className="bump">Your Cart</span>
       <Badge>7</Badge>
     </StyledButton>
   );
 };
+
 const Badge = styled.span`
   background-color: #8a2b06;
   font-weight: 700;
