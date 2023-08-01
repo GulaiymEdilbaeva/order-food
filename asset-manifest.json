@@ -1,16 +1,18 @@
 {
   "files": {
     "main.css": "/order-food/static/css/main.d7c79570.css",
-    "main.js": "/order-food/static/js/main.d8b46d50.js",
+    "main.js": "/order-food/static/js/main.dcfe8c7b.js",
     "static/media/pexels-alexy-almond-3756523 1.png": "/order-food/static/media/pexels-alexy-almond-3756523 1.3fd353b3362c5c8017b7.png",
-    "static/media/basket-icon.svg": "/order-food/static/media/basket-icon.b8d33e94afa151b65893c6647ec288c8.svg",
+    "static/media/basket-icon.svg": "/order-food/static/media/basket-icon.d28f1f24626a511a73b152f85c1cc312.svg",
     "index.html": "/order-food/index.html",
-    "static/media/plus-icon.svg": "/order-food/static/media/plus-icon.b8a001afefc325562f9c1143fc9f21cd.svg",
+    "static/media/plus-icon.svg": "/order-food/static/media/plus-icon.05d9eeabf7804fabf3526a8f976f9d1f.svg",
+    "static/media/plus.svg": "/order-food/static/media/plus.02872023d5c2327766f84b512bedce1c.svg",
+    "static/media/minus-icon.svg": "/order-food/static/media/minus-icon.c3f6a9430af2b1e67575990b6a96d6f7.svg",
     "main.d7c79570.css.map": "/order-food/static/css/main.d7c79570.css.map",
-    "main.d8b46d50.js.map": "/order-food/static/js/main.d8b46d50.js.map"
+    "main.dcfe8c7b.js.map": "/order-food/static/js/main.dcfe8c7b.js.map"
   },
   "entrypoints": [
     "static/css/main.d7c79570.css",
-    "static/js/main.d8b46d50.js"
+    "static/js/main.dcfe8c7b.js"
   ]
 }
