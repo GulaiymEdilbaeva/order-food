@@ -1,70 +1,103 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 
 export const CartContext = React.createContext({
   addedMeals: [],
-
-  totalAmaount: 0,
+  totalAmount: 0,
   onAddMeal: () => {},
+  getTotalAmount: () => {},
+  Decrement: () => {},
+  Increment: () => {},
 });
-export const CartProvider = ({ children }) => {
-  const [addedMeals, setAddedMeals] = useState([]);
 
-  const addMealHandler = (newMeal) => {
-    console.log("asdfasdf");
-    const currentIndex = addedMeals.findIndex((item) => item.id === newMeal.id);
-    if (currentIndex === -1) {
-      return setAddedMeals([...addedMeals, newMeal]);
-    }
-    const newMeals = addedMeals.map((meal) => {
-      if (meal.id === newMeal.id) {
+const cartReducer = (state, action) => {
+  switch (action.type) {
+    case "ADD_MEAL":
+      const currentIndex = state.addedMeals.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      if (currentIndex === -1) {
         return {
-          ...meal,
-          amount: meal.amount + newMeal.amount,
+          ...state,
+          addedMeals: [...state.addedMeals, action.payload],
         };
       }
-      return meal;
-    });
-    setAddedMeals(newMeals);
+      const newMeals = state.addedMeals.map((meal) => {
+        if (meal.id === action.payload.id) {
+          return {
+            ...meal,
+            amount: meal.amount + action.payload.amount,
+          };
+        }
+        return meal;
+      });
+      return {
+        ...state,
+        addedMeals: newMeals,
+      };
+    case "DECREMENT":
+      const productDecrement = state.addedMeals.map((el) => {
+        if (el.id === action.payload && el.amount !== 0) {
+          return {
+            ...el,
+            amount: el.amount - 1,
+          };
+        }
+        return el;
+      });
+      return {
+        ...state,
+        addedMeals: productDecrement,
+      };
+    case "INCREMENT":
+      const productIncrement = state.addedMeals.map((el) => {
+        if (el.id === action.payload && el.amount !== 0) {
+          return {
+            ...el,
+            amount: el.amount + 1,
+          };
+        }
+        return el;
+      });
+      return {
+        ...state,
+        addedMeals: productIncrement,
+      };
+    default:
+      return state;
+  }
+};
+
+export const CartProvider = ({ children }) => {
+  const [cart, dispatch] = useReducer(cartReducer, {
+    addedMeals: [],
+    totalAmount: 0,
+  });
+
+  const addMealHandler = (newMeal) => {
+    dispatch({ type: "ADD_MEAL", payload: newMeal });
   };
 
   const getTotalAmount = () => {
-    return addedMeals.reduce(
+    return cart.addedMeals.reduce(
       (sum, { price, amount }) => sum + amount * price,
       0
     );
   };
 
   const Decrement = (id) => {
-    const update = addedMeals.map((el) => {
-      if (el.id === id && el.amount !== 0) {
-        return {
-          ...el,
-          amount: el.amount - 1,
-        };
-      }
-      return el;
-    });
-    setAddedMeals([...update]);
+    dispatch({ type: "DECREMENT", payload: id });
   };
 
   const Increment = (id) => {
-    const update = addedMeals.map((el) => {
-      if (el.id === id && el.amount !== 0) {
-        return {
-          ...el,
-          amount: el.amount + 1,
-        };
-      }
-      return el;
-    });
-    setAddedMeals([...update]);
+    dispatch({ type: "INCREMENT", payload: id });
   };
+
   return (
     <CartContext.Provider
       value={{
-        addedMeals,
+        addedMeals: cart.addedMeals,
         onAddMeal: addMealHandler,
-        totalAmount: 0,
+        totalAmount: cart.totalAmount,
         getTotalAmount,
         Decrement,
         Increment,

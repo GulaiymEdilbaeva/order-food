@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { MealItemForm } from "./MealItemForm";
 import { styled } from "styled-components";
 import { CartContext } from "../../store/cart-context";
 
 export const MealItem = ({ title, about, id, price }) => {
   const { onAddMeal } = useContext(CartContext);
+  const [amount, setAmount] = useState(1);
   const addMealToCartHandler = (amount) => {
     console.log("asdf");
     onAddMeal({
@@ -21,7 +22,11 @@ export const MealItem = ({ title, about, id, price }) => {
         <p>{about}</p>
         <span>${price}</span>
       </Content>
-      <MealItemForm onAddMeal={addMealToCartHandler} />
+      <MealItemForm
+        amount={amount}
+        setAmount={setAmount}
+        onAddMeal={addMealToCartHandler}
+      />
     </ListItem>
   );
 };

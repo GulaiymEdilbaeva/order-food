@@ -15,7 +15,7 @@ export const CartItem = ({ title, meal, price, amount }) => {
           <span className="amount"> x{amount}</span>
         </PriceContainer>
       </Content>
-      <div>
+      <StyleofIcon>
         <Button
           borderStyle="squared"
           variant="outlined"
@@ -30,7 +30,7 @@ export const CartItem = ({ title, meal, price, amount }) => {
         >
           +
         </Button>
-      </div>
+      </StyleofIcon>
     </ListItem>
   );
 };
@@ -67,4 +67,9 @@ const ListItem = styled.li`
   justify-content: space-between;
   padding: 24px 0;
   border-bottom: 1px solid #dcd9d9;
+`;
+const StyleofIcon = styled.div`
+  display: flex;
+  gap: 10px;
+  padding-top: 2rem;
 `;
