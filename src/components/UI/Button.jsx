@@ -11,7 +11,7 @@ const Button = ({
   return (
     <StyledButton
       onClick={onClick}
-      borderStyle={borderStyle}
+      borderstyle={borderStyle}
       variant={variant}
       {...restProps}
     >
@@ -35,7 +35,7 @@ const getColor = (props) => {
 };
 
 const getBorderRadius = (props) => {
-  return props.borderStyle === "rounded" ? "20px" : "6px";
+  return props.borderstyle === "rounded" ? "20px" : "6px";
 };
 
 const StyledButton = styled.button`

@@ -5,7 +5,7 @@ export const TotalAmount = ({ totalAmount = 0 }) => {
   return (
     <Container>
       <h3>TotalAmount</h3>
-      <b>${Number(totalAmount).toFixed(2)}</b>
+      <b>${totalAmount.toFixed(2)}</b>
     </Container>
   );
 };
