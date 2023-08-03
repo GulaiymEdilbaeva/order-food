@@ -2,7 +2,7 @@
 ## Order food
 ## Used By
 
-This project is used by the following companies:
+### This project is used by the following companies:
 -This is Ordre food.
 -Written using the React library.
 -The design was taken from Figma.
