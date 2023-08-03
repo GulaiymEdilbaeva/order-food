@@ -6,8 +6,8 @@ import { CartContext } from "../../store/cart-context";
 export const MealItem = ({ title, about, id, price }) => {
   const { onAddMeal } = useContext(CartContext);
   const [amount, setAmount] = useState(1);
+
   const addMealToCartHandler = (amount) => {
-    console.log("asdf");
     onAddMeal({
       title,
       price,

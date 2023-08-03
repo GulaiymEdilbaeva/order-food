@@ -4,101 +4,122 @@ export const CartContext = React.createContext({
   addedMeals: [],
   totalAmount: 0,
   onAddMeal: () => {},
-  getTotalAmount: () => {},
   Decrement: () => {},
   Increment: () => {},
 });
 
+const ADD_MEAL_TYPE = "ADD_MEAL";
+const INCREMENT_MEAL = "INCREMENT_AMOUNT";
+const DECREMENT_MEAL = "DECREMENT_AMOUNT";
+
 const cartReducer = (state, action) => {
   switch (action.type) {
-    case "ADD_MEAL":
-      const currentIndex = state.addedMeals.findIndex(
-        (item) => item.id === action.payload.id
-      );
-      if (currentIndex === -1) {
+    case ADD_MEAL_TYPE: {
+      const prevMeals = state.addedMeals;
+      const newMeal = action.payload;
+
+      if (prevMeals.length === 0) {
         return {
           ...state,
-          addedMeals: [...state.addedMeals, action.payload],
+          addedMeals: [newMeal],
         };
       }
-      const newMeals = state.addedMeals.map((meal) => {
-        if (meal.id === action.payload.id) {
+      const isMealExist = prevMeals.find((meal) => meal.id === newMeal.id);
+      if (isMealExist === undefined) {
+        return {
+          ...state,
+          addedMeals: [...prevMeals, newMeal],
+        };
+      }
+      const newAddedMeals = prevMeals.map((meal) => {
+        if (meal.id === newMeal.id) {
           return {
             ...meal,
-            amount: meal.amount + action.payload.amount,
+            amount: meal.amount + newMeal.amount,
           };
         }
         return meal;
       });
       return {
         ...state,
-        addedMeals: newMeals,
+        addedMeals: newAddedMeals,
       };
-    case "DECREMENT":
-      const productDecrement = state.addedMeals.map((el) => {
-        if (el.id === action.payload && el.amount !== 0) {
-          return {
-            ...el,
-            amount: el.amount - 1,
-          };
+    }
+
+    case INCREMENT_MEAL: {
+      const prevMeals = state.addedMeals;
+      const mealId = action.payload;
+      const newAddedMeals = prevMeals.map((meal) => {
+        if (meal.id === mealId) {
+          return { ...meal, amount: meal.amount + 1 };
         }
-        return el;
+        return meal;
       });
       return {
         ...state,
-        addedMeals: productDecrement,
+        addedMeals: newAddedMeals,
       };
-    case "INCREMENT":
-      const productIncrement = state.addedMeals.map((el) => {
-        if (el.id === action.payload && el.amount !== 0) {
-          return {
-            ...el,
-            amount: el.amount + 1,
-          };
+    }
+
+    case DECREMENT_MEAL: {
+      const prevMeals = state.addedMeals;
+      const mealId = action.payload;
+      const currentMealItem = prevMeals.find((meal) => meal.id === mealId);
+      console.log(currentMealItem);
+
+      if (currentMealItem.amount === 1) {
+        return {
+          ...state,
+          addedMeals: prevMeals.filter(
+            (meal) => meal.id !== currentMealItem.id
+          ),
+        };
+      }
+
+      const newAddedMeals = prevMeals.map((meal) => {
+        if (meal.id === mealId) {
+          return { ...meal, amount: meal.amount - 1 };
         }
-        return el;
+        return meal;
       });
+
       return {
         ...state,
-        addedMeals: productIncrement,
+        addedMeals: newAddedMeals,
       };
-    default:
+    }
+    default: {
       return state;
+    }
   }
 };
 
 export const CartProvider = ({ children }) => {
-  const [cart, dispatch] = useReducer(cartReducer, {
-    addedMeals: [],
-    totalAmount: 0,
-  });
+  const [cart, dispatch] = useReducer(cartReducer, { addedMeals: [] });
+
+  const { addedMeals = [] } = cart;
 
   const addMealHandler = (newMeal) => {
     dispatch({ type: "ADD_MEAL", payload: newMeal });
   };
 
-  const getTotalAmount = () => {
-    return cart.addedMeals.reduce(
-      (sum, { price, amount }) => sum + amount * price,
-      0
-    );
-  };
-
   const Decrement = (id) => {
-    dispatch({ type: "DECREMENT", payload: id });
+    dispatch({ type: "DECREMENT_AMOUNT", payload: id });
   };
 
   const Increment = (id) => {
-    dispatch({ type: "INCREMENT", payload: id });
+    dispatch({ type: "INCREMENT_AMOUNT", payload: id });
   };
 
+  const totalAmount = addedMeals.reduce((acc, meal) => {
+    return acc + meal.price * meal.amount;
+  }, 0);
   return (
     <CartContext.Provider
       value={{
-        addedMeals: cart.addedMeals,
+        addedMeals,
         onAddMeal: addMealHandler,
-        totalAmount: cart.totalAmount,
-        getTotalAmount,
+        totalAmount,
         Decrement,
         Increment,
       }}

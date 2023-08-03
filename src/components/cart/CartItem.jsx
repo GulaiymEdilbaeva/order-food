@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { styled } from "styled-components";
-// import { MinusIcon, Plus } from "../../assets";
 import Button from "../UI/Button";
 import { CartContext } from "../../store/cart-context";
 

@@ -7,7 +7,7 @@ import Button from "../UI/Button";
 import { CartContext } from "../../store/cart-context";
 
 export const Cart = ({ onClose }) => {
-  const { addedMeals, getTotalAmount } = useContext(CartContext);
+  const { addedMeals, totalAmount } = useContext(CartContext);
 
   return (
     <Modal onClose={onClose}>
@@ -28,7 +28,7 @@ export const Cart = ({ onClose }) => {
             })}
           </CartList>
         ) : null}
-        <TotalAmount onClick={onClose} totalAmount={getTotalAmount()} />
+        <TotalAmount totalAmount={totalAmount} />
         <ActionSContainer>
           <Button onClick={onClose} variant="outlined">
             Close
