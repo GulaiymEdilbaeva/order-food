@@ -1,28 +1,62 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal } from "../UI/modal/Modal";
 import { CartItem } from "./CartItem";
 import { styled } from "styled-components";
 import { TotalAmount } from "./TotalAmount";
 import Button from "../UI/Button";
-import { CartContext } from "../../store/cart-context";
+
+import { fetchRequest } from "../../api/fetchRequest";
 
 export const Cart = ({ onClose }) => {
-  const { addedMeals, totalAmount } = useContext(CartContext);
+  const [cartMeals, setCartMeals] = useState([]);
+  const getCartMeals = () => {
+    fetchRequest("basket").then((result) => {
+      setCartMeals(result.data.items);
+    });
+  };
+  useEffect(() => {
+    getCartMeals();
+  }, []);
 
+  const increaseAmountHandler = async (id, amount) => {
+    fetchRequest(`/basketItem/${id}/update`, {
+      method: "PUT",
+      body: { amount: amount + 1 },
+    }).then(getCartMeals);
+  };
+  const decreaseAmountHandler = async (id, amount) => {
+    if (amount === 1) {
+      fetchRequest(`/basketItem/${id}/delete`, {
+        method: "DELETE",
+      }).then(getCartMeals);
+    } else {
+      fetchRequest(`/basketItem/${id}/update`, {
+        method: "PUT",
+        body: { amount: amount - 1 },
+      }).then(getCartMeals);
+    }
+  };
+
+  const totalAmount = cartMeals.reduce((acc, meal) => {
+    return acc + meal.price * meal.amount;
+  }, 0);
   return (
     <Modal onClose={onClose}>
       <Content>
-        {addedMeals.length ? (
+        {cartMeals.length ? (
           <CartList>
-            {addedMeals.map((meal) => {
+            {cartMeals.map((meal) => {
               return meal.amount !== 0 ? (
                 <CartItem
                   title={meal.title}
                   amount={meal.amount}
                   price={meal.price}
-                  key={meal.id}
+                  key={meal._id}
                   meal={meal}
-                  id={meal.id}
+                  id={meal._id}
+                  description={meal.description}
+                  Increment={increaseAmountHandler}
+                  Decrement={decreaseAmountHandler}
                 />
               ) : null;
             })}
