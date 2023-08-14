@@ -7,7 +7,22 @@ export const CartContext = React.createContext({
   Decrement: () => {},
   Increment: () => {},
 });
-
+const fetchCartMeals = async () => {
+  try {
+    const response = await fetch(
+      "http://ec2-3-76-44-71.eu-central-1.compute.amazonaws.com:5500/api/v1/basket",
+      {
+        headers: {
+          UserID: "Gulaiym",
+        },
+      }
+    );
+    const result = await response.json();
+    return result.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 const ADD_MEAL_TYPE = "ADD_MEAL";
 const INCREMENT_MEAL = "INCREMENT_AMOUNT";
 const DECREMENT_MEAL = "DECREMENT_AMOUNT";
@@ -114,6 +129,7 @@ export const CartProvider = ({ children }) => {
   const totalAmount = addedMeals.reduce((acc, meal) => {
     return acc + meal.price * meal.amount;
   }, 0);
+
   return (
     <CartContext.Provider
       value={{

@@ -3,27 +3,38 @@ import { MealItemForm } from "./MealItemForm";
 import { styled } from "styled-components";
 import { CartContext } from "../../store/cart-context";
 
-export const MealItem = ({ title, about, id, price }) => {
+export const MealItem = ({ title, description, id, price }) => {
   const { onAddMeal } = useContext(CartContext);
   const [amount, setAmount] = useState(1);
 
-  const addMealToCartHandler = (amount) => {
-    onAddMeal({
-      title,
-      price,
-      amount,
-      id,
-    });
+  const addMealToCartHandler = async (amount) => {
+    try {
+      const response = await fetch(
+        `http://ec2-3-76-44-71.eu-central-1.compute.amazonaws.com:5500/api/v1/foods/${id}/addToBasket`,
+        {
+          method: "POST",
+          headers: {
+            UserID: "Gulaiym",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ amount }),
+        }
+      );
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <ListItem>
       <Content>
         <b>{title}</b>
-        <p>{about}</p>
+        <p>{description}</p>
         <span>${price}</span>
       </Content>
       <MealItemForm
-        amount={amount}
+        amount={amount._id}
         setAmount={setAmount}
         onAddMeal={addMealToCartHandler}
       />

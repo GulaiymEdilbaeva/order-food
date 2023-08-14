@@ -1,10 +1,16 @@
-import React, { useContext } from "react";
+import React from "react";
 import { styled } from "styled-components";
 import Button from "../UI/Button";
-import { CartContext } from "../../store/cart-context";
 
-export const CartItem = ({ title, meal, price, amount }) => {
-  const { Decrement, Increment } = useContext(CartContext);
+export const CartItem = ({
+  title,
+  meal,
+  price,
+  amount,
+  id,
+  Increment,
+  Decrement,
+}) => {
   return (
     <ListItem>
       <Content>
@@ -18,14 +24,14 @@ export const CartItem = ({ title, meal, price, amount }) => {
         <Button
           borderStyle="squared"
           variant="outlined"
-          onClick={() => Decrement(meal.id)}
+          onClick={() => Decrement(id, amount)}
         >
           -
         </Button>
         <Button
           borderStyle="squared"
           variant="outlined"
-          onClick={() => Increment(meal.id)}
+          onClick={() => Increment(id, amount)}
         >
           +
         </Button>

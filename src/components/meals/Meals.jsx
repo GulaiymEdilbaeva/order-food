@@ -1,45 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { MealItem } from "../mealItem/MealItem";
+import { fetchRequest } from "../../api/fetchRequest";
 
-export const DUMMY_MEALS = [
-  {
-    id: 1,
-    title: "Sushi",
-    about: "Finest fish and veggies",
-    price: 22.99,
-  },
-  {
-    id: 2,
-    title: "Schnitzel",
-    about: "A german specialty!",
-    price: 16.0,
-  },
-  {
-    id: 3,
-    title: "Barbecue Burger",
-    about: "American, raw, meaty",
-    price: 12.99,
-  },
-  {
-    id: 4,
-    title: "Green Bowl",
-    about: "Healthy...and green...",
-    price: 19.99,
-  },
-];
 export const Meals = () => {
+  const [meals, setMeals] = useState([]);
+
+  useEffect(() => {
+    fetchRequest("foods").then((result) => setMeals(result.data));
+  }, []);
+
   return (
     <Container>
       <ul>
-        {DUMMY_MEALS.map((meal) => {
+        {meals?.map((meal) => {
           return (
             <MealItem
-              key={meal.id}
+              key={meal._id}
               title={meal.title}
-              about={meal.about}
+              description={meal.description}
               price={meal.price}
-              id={meal.id}
+              id={meal._id}
             />
           );
         })}
